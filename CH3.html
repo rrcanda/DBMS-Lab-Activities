@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html xml:lang="en" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <title>Chapter 3: Database Design and Modeling</title>
+  <meta name="CreationTime" content="2025-02-04T15:29:10Z" />
+  <meta name="ModificationTime" content="2025-02-04T15:29:10Z" />
+  <meta name="Generator" content="Scrivener for Windows HTML Writer" />
+  <meta name="ScrivenerVersion" content="3.1.4.0" />
+  <style type="text/css">
+    body {font-family: 'Sitka Text'; font-size: 12pt; font-style: normal; font-weight: 400}
+    div.div1 {margin: 0 auto; width: 600px}
+    ol.ol1 {margin-left: 0rem}
+    span.s1 {font-family: 'Candara'; font-size: 1.67rem; font-weight: bold}
+    span.s2 {font-weight: bold}
+    span.s3 {font-family: 'Courier New'}
+    ul.ul1 {margin-left: 0rem}
+    span.Scrivener-converted-space {white-space:pre;}
+  </style>
+</head>
+<body>
+<div class="div1">
+<h2 class="ps1"><a id="doc1"></a><strong><span class="s1">Chapter 3: Database Design and Modeling</span></strong></h2>
+<h2 class="ps1"><a id="doc2"></a><strong><span class="s1">Laboratory Activity 5:</span></strong></h2>
+<p class="ps2"><strong><span class="s2">Laboratory Title:</span></strong> Normalization - First Normal Form (1NF)<br /><strong><span class="s2">Chapter No. and Topic:</span></strong> Chapter 3 - Database Design and Modeling<br /><strong><span class="s2">Discussions:</span></strong><br />This activity demonstrates how to normalize a table to the First Normal Form (1NF).</p>
+<p class="ps2"><strong><span class="s2">Activity Description:</span></strong><br />Given a sample non-normalized table, convert it to 1NF by ensuring that all columns contain atomic values.</p>
+<p class="ps2"><strong><span class="s2">Objectives:</span></strong></p>
+<ul class="ul1">
+  <li class="ps3">Understand how to apply 1NF to a database design.</li>
+  <li class="ps4">Convert a table into 1NF.</li>
+</ul>
+<p class="ps2"><strong><span class="s2">Materials:</span></strong></p>
+<ul class="ul1">
+  <li class="ps5">SQL client</li>
+</ul>
+<p class="ps2"><strong><span class="s2">Procedure:</span></strong></p>
+<ol class="ol1">
+  <li class="ps3">Start by creating a sample non-normalized table:</li>
+</ol>
+<p class="ps6"><span class="s3">sql</span></p>
+<p class="ps7"><span class="s3">Copy code</span></p>
+<p class="ps7"><span class="s3">CREATE TABLE UnNormalizedBooks (</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>BookID INT,</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>Title VARCHAR(100),</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>Authors VARCHAR(100),</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>Genre VARCHAR(50)</span></p>
+<p class="ps7"><span class="s3">);</span></p>
+<p class="ps8"><br /></p>
+<ol class="ol1">
+  <li class="ps9">Insert data into the table:</li>
+</ol>
+<p class="ps6"><span class="s3">sql</span></p>
+<p class="ps7"><span class="s3">Copy code</span></p>
+<p class="ps7"><span class="s3">INSERT INTO UnNormalizedBooks (BookID, Title, Authors, Genre)</span></p>
+<p class="ps7"><span class="s3">VALUES</span></p>
+<p class="ps7"><span class="s3">(1, 'Book A', 'Author1, Author2', 'Fiction'),</span></p>
+<p class="ps7"><span class="s3">(2, 'Book B', 'Author3', 'Non-Fiction');</span></p>
+<p class="ps8"><br /></p>
+<ol class="ol1">
+  <li class="ps9">Convert to 1NF by creating separate rows for multiple authors:</li>
+</ol>
+<p class="ps6"><span class="s3">sql</span></p>
+<p class="ps7"><span class="s3">Copy code</span></p>
+<p class="ps7"><span class="s3">CREATE TABLE Books_1NF (</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>BookID INT,</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>Title VARCHAR(100),</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>Author VARCHAR(100),</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>Genre VARCHAR(50)</span></p>
+<p class="ps7"><span class="s3">);</span></p>
+<p class="ps8"><br /></p>
+<ol class="ol1">
+  <li class="ps4">Insert normalized data:</li>
+</ol>
+<p class="ps6"><span class="s3">sql</span></p>
+<p class="ps7"><span class="s3">Copy code</span></p>
+<p class="ps7"><span class="s3">INSERT INTO Books_1NF (BookID, Title, Author, Genre)</span></p>
+<p class="ps7"><span class="s3">VALUES</span></p>
+<p class="ps7"><span class="s3">(1, 'Book A', 'Author1', 'Fiction'),</span></p>
+<p class="ps7"><span class="s3">(1, 'Book A', 'Author2', 'Fiction'),</span></p>
+<p class="ps7"><span class="s3">(2, 'Book B', 'Author3', 'Non-Fiction');</span></p>
+<p class="ps8"><br /></p>
+<p class="ps2"><strong><span class="s2">Result:</span></strong><br />The table is now in 1NF with atomic values for each column.</p>
+<p class="ps10"><br /></p>
+<p class="ps2"><strong><span class="s2">Additional Questions/Discussions:</span></strong></p>
+<ul class="ul1">
+  <li class="ps3">How does 1NF improve data integrity?</li>
+  <li class="ps4">What are atomic values, and why are they important?</li>
+</ul>
+<p class="ps11"><br /></p>
+<p class="ps2"><strong><span class="s2">Conclusions:</span></strong></p>
+<p class="ps11"><br /></p>
+<h2 class="ps1"><a id="doc3"></a><strong><span class="s1">Laboratory Activity 6:</span></strong></h2>
+<p class="ps2"><strong><span class="s2">Laboratory Title:</span></strong> Normalization - Second Normal Form (2NF)<br /><strong><span class="s2">Chapter No. and Topic:</span></strong> Chapter 3 - Database Design and Modeling<br /><strong><span class="s2">Discussions:</span></strong><br />This activity will cover the process of converting a table to the Second Normal Form (2NF).</p>
+<p class="ps2"><strong><span class="s2">Activity Description:</span></strong><br />Given a 1NF table, remove partial dependencies to achieve 2NF.</p>
+<p class="ps2"><strong><span class="s2">Objectives:</span></strong></p>
+<ul class="ul1">
+  <li class="ps5">Remove partial dependencies and achieve 2NF.</li>
+</ul>
+<p class="ps2"><strong><span class="s2">Materials:</span></strong></p>
+<ul class="ul1">
+  <li class="ps5">SQL client</li>
+</ul>
+<p class="ps2"><strong><span class="s2">Procedure:</span></strong></p>
+<ol class="ol1">
+  <li class="ps3">Create a 1NF table:</li>
+</ol>
+<p class="ps6"><span class="s3">sql</span></p>
+<p class="ps7"><span class="s3">Copy code</span></p>
+<p class="ps7"><span class="s3">CREATE TABLE Books_1NF (</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>BookID INT,</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>Title VARCHAR(100),</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>Author VARCHAR(100),</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>Genre VARCHAR(50),</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>Publisher VARCHAR(100),</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>PublisherAddress VARCHAR(100)</span></p>
+<p class="ps7"><span class="s3">);</span></p>
+<p class="ps8"><br /></p>
+<ol class="ol1">
+  <li class="ps9">Insert sample data:</li>
+</ol>
+<p class="ps6"><span class="s3">sql</span></p>
+<p class="ps7"><span class="s3">Copy code</span></p>
+<p class="ps7"><span class="s3">INSERT INTO Books_1NF (BookID, Title, Author, Genre, Publisher, PublisherAddress)</span></p>
+<p class="ps7"><span class="s3">VALUES</span></p>
+<p class="ps7"><span class="s3">(1, 'Book A', 'Author1', 'Fiction', 'Publisher1', 'Address1'),</span></p>
+<p class="ps7"><span class="s3">(2, 'Book B', 'Author2', 'Non-Fiction', 'Publisher1', 'Address1');</span></p>
+<p class="ps8"><br /></p>
+<ol class="ol1">
+  <li class="ps9">Create two separate tables to remove partial dependency:</li>
+</ol>
+<p class="ps6"><span class="s3">sql</span></p>
+<p class="ps7"><span class="s3">Copy code</span></p>
+<p class="ps7"><span class="s3">CREATE TABLE Books_2NF (</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>BookID INT PRIMARY KEY,</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>Title VARCHAR(100),</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>Author VARCHAR(100),</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>Genre VARCHAR(50)</span></p>
+<p class="ps7"><span class="s3">);</span></p>
+<p class="ps8"><br /></p>
+<p class="ps7"><span class="s3">CREATE TABLE Publishers (</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>PublisherID INT PRIMARY KEY,</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>PublisherName VARCHAR(100),</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>PublisherAddress VARCHAR(100)</span></p>
+<p class="ps7"><span class="s3">);</span></p>
+<p class="ps8"><br /></p>
+<ol class="ol1">
+  <li class="ps4">Move Publisher data into the <span class="s3">Publishers</span> table and adjust <span class="s3">Books_2NF</span> to include <span class="s3">PublisherID</span> as a foreign key.</li>
+</ol>
+<p class="ps2"><strong><span class="s2">Result:</span></strong><br />The table is now in 2NF with no partial dependencies.</p>
+<p class="ps10"><br /></p>
+<p class="ps2"><strong><span class="s2">Additional Questions/Discussions:</span></strong></p>
+<ul class="ul1">
+  <li class="ps3">What is a partial dependency, and how does 2NF eliminate it?</li>
+  <li class="ps4">How do foreign keys help maintain data integrity?</li>
+</ul>
+<p class="ps11"><br /></p>
+<p class="ps2"><strong><span class="s2">Conclusions:</span></strong></p>
+<p class="ps11"><br /></p>
+<h2 class="ps1"><a id="doc4"></a><strong><span class="s1">Laboratory Activity 7:</span></strong></h2>
+<p class="ps2"><strong><span class="s2">Laboratory Title:</span></strong> Normalization - Third Normal Form (3NF)<br /><strong><span class="s2">Chapter No. and Topic:</span></strong> Chapter 3 - Database Design and Modeling<br /><strong><span class="s2">Discussions:</span></strong><br />This activity will guide students through converting a table to the Third Normal Form (3NF) by removing transitive dependencies.</p>
+<p class="ps2"><strong><span class="s2">Activity Description:</span></strong><br />Normalize a table in 2NF to 3NF by eliminating transitive dependencies.</p>
+<p class="ps2"><strong><span class="s2">Objectives:</span></strong></p>
+<ul class="ul1">
+  <li class="ps5">Achieve 3NF by eliminating transitive dependencies.</li>
+</ul>
+<p class="ps2"><strong><span class="s2">Materials:</span></strong></p>
+<ul class="ul1">
+  <li class="ps5">SQL client</li>
+</ul>
+<p class="ps2"><strong><span class="s2">Procedure:</span></strong></p>
+<ol class="ol1">
+  <li class="ps3">Start with a 2NF table:</li>
+</ol>
+<p class="ps6"><span class="s3">sql</span></p>
+<p class="ps7"><span class="s3">Copy code</span></p>
+<p class="ps7"><span class="s3">CREATE TABLE Books_2NF (</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>BookID INT,</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>Title VARCHAR(100),</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>Author VARCHAR(100),</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>Genre VARCHAR(50),</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>PublisherID INT,</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>PublisherName VARCHAR(100),</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>PublisherAddress VARCHAR(100)</span></p>
+<p class="ps7"><span class="s3">);</span></p>
+<p class="ps8"><br /></p>
+<ol class="ol1">
+  <li class="ps9">Insert data:</li>
+</ol>
+<p class="ps6"><span class="s3">sql</span></p>
+<p class="ps7"><span class="s3">Copy code</span></p>
+<p class="ps7"><span class="s3">INSERT INTO Books_2NF (BookID, Title, Author, Genre, PublisherID, </span></p>
+<p class="ps7"><span class="s3">PublisherName, PublisherAddress)</span></p>
+<p class="ps7"><span class="s3">VALUES</span></p>
+<p class="ps7"><span class="s3">(1, 'Book A', 'Author1', 'Fiction', 1, 'Publisher1', 'Address1'),</span></p>
+<p class="ps7"><span class="s3">(2, 'Book B', 'Author2', 'Non-Fiction', 1, 'Publisher1', 'Address1');</span></p>
+<p class="ps8"><br /></p>
+<ol class="ol1">
+  <li class="ps9">Separate publisher details into a new table and link with <span class="s3">PublisherID</span>:</li>
+</ol>
+<p class="ps6"><span class="s3">sql</span></p>
+<p class="ps7"><span class="s3">Copy code</span></p>
+<p class="ps7"><span class="s3">CREATE TABLE Publishers_3NF (</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>PublisherID INT PRIMARY KEY,</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>PublisherName VARCHAR(100),</span></p>
+<p class="ps7"><span class="s3"> <span class="Scrivener-converted-space">   </span>PublisherAddress VARCHAR(100)</span></p>
+<p class="ps7"><span class="s3">);</span></p>
+<p class="ps8"><br /></p>
+<ol class="ol1">
+  <li class="ps4">Remove <span class="s3">PublisherName</span> and <span class="s3">PublisherAddress</span> from <span class="s3">Books_2NF</span> and adjust the table to use only <span class="s3">PublisherID</span>.</li>
+</ol>
+<p class="ps2"><strong><span class="s2">Result:</span></strong><br />The table is now in 3NF, with no transitive dependencies.</p>
+<p class="ps12"><br /></p>
+<p class="ps2"><strong><span class="s2">Additional Questions/Discussions:</span></strong></p>
+<ul class="ul1">
+  <li class="ps3">What are transitive dependencies, and why should they be eliminated?</li>
+  <li class="ps4">How does 3NF improve data integrity?</li>
+</ul>
+<p class="ps13"><br /></p>
+<p class="ps2"><strong><span class="s2">Conclusions:</span></strong></p>
+<p class="ps11"><br /></p>
+</div>
+</body>
+</html>
